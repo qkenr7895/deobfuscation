@@ -2,7 +2,3 @@ token
 vmprotect/
 VMHunt/
 deobfuscator/tracer/obj*
-test/objdump*
-test/trace*
-test/test
-test/test_vmp
