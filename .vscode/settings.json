@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.ph": "cpp",
+        "filesystem": "cpp",
+        "stdexcept": "cpp",
+        "string": "cpp"
+    }
+}
