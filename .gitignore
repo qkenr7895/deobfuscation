@@ -1,4 +1,5 @@
 token
+.vscode
 vmprotect/
 VMHunt/
 deobfuscator/tracer/obj*
