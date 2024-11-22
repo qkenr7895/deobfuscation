@@ -2,8 +2,9 @@ ROOT_DIR=..
 PIN_DIR=$(ROOT_DIR)/pin
 TRACER_DIR=$(ROOT_DIR)/deobfuscator/tracer
 
-TARGET_BINARY=./test_vmp
-TRACE_FILE=./trace_vmp
+TARGET_POSTFIX=vmp
+TARGET_BINARY=./test_$(TARGET_POSTFIX)
+TRACE_FILES=trace vm_enter vm_exit vm_enter_call vm_exit_ret
 
 all:
 	gcc -O0 -g -o test_native test.c
@@ -14,10 +15,13 @@ objdump:
 
 trace:
 	$(PIN_DIR)/pin -t $(TRACER_DIR)/obj-intel64/instracelog.so -- $(TARGET_BINARY)
-	mv instrace.txt $(TRACE_FILE)
+	$(foreach file, $(TRACE_FILES), mv $(file) $(file)_$(TARGET_POSTFIX); )
 
 trace_debug:
 	$(PIN_DIR)/pin -appdebug -t $(TRACER_DIR)/obj-intel64/instracelog.so -- $(TARGET_BINARY)
 
+clean_all: clean
+	rm -f test_*
+
 clean:
-	rm -f trace* test_* objdump* pin*
+	rm -f trace* objdump* pin* vm_enter* vm_exit*
