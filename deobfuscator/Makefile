@@ -1,9 +1,8 @@
-ROOT_DIR=..
-PIN_ROOT=$(ROOT_DIR)/pin
+ROOT_DIR=$(PWD)/..
 
 pin:
 	cd tracer ; \
-	make PIN_ROOT=/root/pin-external-3.31-98869-gfa6f126a8-gcc-linux
+	make PIN_ROOT=$(ROOT_DIR)/pin
 
 clean:
 	rm -f core.o parser.o mg-symengine.o mgse slicer vmextract
