@@ -4,7 +4,7 @@ vmprotect/
 VMHunt/
 code_virtualizer/
 deobfuscator/tracer/obj*
-VMP*
+VMP-Imports-Deobfuscator
 
 test/trace* 
 test/test_*
