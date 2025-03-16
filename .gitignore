@@ -10,3 +10,6 @@ test/trace*
 test/test_*
 test/objdump* 
 test/pin*
+
+triton/output
+triton/test_native_tmp
