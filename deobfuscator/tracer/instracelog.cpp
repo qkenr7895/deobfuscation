@@ -16,6 +16,7 @@ using namespace std;
 
 std::map<ADDRINT, std::string> opcmap;
 std::map<ADDRINT, std::string> ins_type;
+std::map<ADDRINT, std::string> opbytes;
 FILE *fp_trace, *fp_vm_enter, *fp_vm_exit, *fp_vm_enter_call, *fp_vm_exit_ret;
 
 REG regs_idx[16] = {REG_RAX, REG_RBX, REG_RCX, REG_RDX, REG_RSI, REG_RDI, 
@@ -87,14 +88,16 @@ void get_context(ADDRINT addr, CONTEXT *fromctx, ADDRINT raddr, ADDRINT waddr) {
 
      // output execution trace
      fprintf(fp_trace, "%ld ", seq_num);
+     // fprintf(fp_trace, "%p;", (void *)addr);
+     // fprintf(fp_trace, "%s;", opbytes[addr].c_str());
      fprintf(fp_trace, "%s;", opcmap[addr].c_str());
 
-     for (int i = 0; i < 16; i++) {
-          fprintf(fp_trace, "%s:%lx;", regs_str[i], before_general_regs_val[i]);
-     }
-     fprintf(fp_trace, "rflags:%lx;", before_rflags_val);
-     fprintf(fp_trace, "%lx;", addr_to_write);
-     fprintf(fp_trace, "%lx;;", addr_to_read);
+     // for (int i = 0; i < 16; i++) {
+     //      fprintf(fp_trace, "%s:%lx;", regs_str[i], before_general_regs_val[i]);
+     // }
+     // fprintf(fp_trace, "rflags:%lx;", before_rflags_val);
+     // fprintf(fp_trace, "write:%lx;", addr_to_write);
+     // fprintf(fp_trace, "read:%lx;;", addr_to_read);
 
      fprintf(fp_trace, "\n");
 }
@@ -158,6 +161,19 @@ static void instruction(INS ins, void *v) {
           } else {
                ins_type.insert(std::pair<ADDRINT, std::string>(addr, "none"));
           }
+
+          const UINT64 insSize = INS_Size(ins);
+          std::string hexBytes;
+          for (UINT64 i = 0; i < insSize; i++) {
+               unsigned char byteVal = 0;
+               PIN_SafeCopy(&byteVal, reinterpret_cast<const void*>(addr + i), 1);
+
+               char temp[4];
+               sprintf(temp, "%02x", byteVal);
+               hexBytes += temp;
+          }
+          opbytes.insert(std::make_pair(addr, hexBytes));
+
      }
 
      if (INS_IsMemoryRead(ins) && INS_IsMemoryWrite(ins)) {

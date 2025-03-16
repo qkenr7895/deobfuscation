@@ -3,7 +3,7 @@ PIN_DIR=$(ROOT_DIR)/pin
 TRACER_DIR=$(ROOT_DIR)/deobfuscator/tracer
 
 TARGET_POSTFIX=vmp
-TARGET_BINARY=./test_$(TARGET_POSTFIX)
+TARGET_BINARY=./test_native_$(TARGET_POSTFIX)
 TRACE_FILES=trace vm_enter vm_exit vm_enter_call vm_exit_ret
 
 all:
@@ -25,3 +25,4 @@ clean_all: clean
 
 clean:
 	rm -f trace* objdump* pin* vm_enter* vm_exit*
+	rm -f $(TARGET_BINARY).*

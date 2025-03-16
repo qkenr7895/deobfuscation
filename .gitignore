@@ -2,7 +2,9 @@ token
 .vscode
 vmprotect/
 VMHunt/
+code_virtualizer/
 deobfuscator/tracer/obj*
+VMP*
 
 test/trace* 
 test/test_*
