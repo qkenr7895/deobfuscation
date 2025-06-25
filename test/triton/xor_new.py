@@ -130,7 +130,6 @@ def replay_pin_trace(trace_path: str):
                         pre = state_log[seq]["pre"]
                         post= state_log[seq]["post"]
 
-                        # 바뀐 레지스터만 보기 좋게 표시
                         changed = [r for r in REG_NAMES if pre.get(r)!=post.get(r)]
                         if not changed:
                             print("      (registers unchanged)")
