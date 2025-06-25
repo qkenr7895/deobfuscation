@@ -87,17 +87,17 @@ void get_context(ADDRINT addr, CONTEXT *fromctx, ADDRINT raddr, ADDRINT waddr) {
      vm_exit_context_list.push_back(context_tmp);
 
      // output execution trace
-     fprintf(fp_trace, "%ld ", seq_num);
-     // fprintf(fp_trace, "%p;", (void *)addr);
-     // fprintf(fp_trace, "%s;", opbytes[addr].c_str());
+     fprintf(fp_trace, "%ld;", seq_num);
+     fprintf(fp_trace, "%p;", (void *)addr);
+     fprintf(fp_trace, "%s;", opbytes[addr].c_str());
      fprintf(fp_trace, "%s;", opcmap[addr].c_str());
 
-     // for (int i = 0; i < 16; i++) {
-     //      fprintf(fp_trace, "%s:%lx;", regs_str[i], before_general_regs_val[i]);
-     // }
-     // fprintf(fp_trace, "rflags:%lx;", before_rflags_val);
-     // fprintf(fp_trace, "write:%lx;", addr_to_write);
-     // fprintf(fp_trace, "read:%lx;;", addr_to_read);
+     for (int i = 0; i < 16; i++) {
+          fprintf(fp_trace, "%s:%lx;", regs_str[i], before_general_regs_val[i]);
+     }
+     fprintf(fp_trace, "rflags:%lx;", before_rflags_val);
+     fprintf(fp_trace, "write:%lx;", addr_to_write);
+     fprintf(fp_trace, "read:%lx;;", addr_to_read);
 
      fprintf(fp_trace, "\n");
 }

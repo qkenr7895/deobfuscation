@@ -5,9 +5,12 @@ VMHunt/
 code_virtualizer/
 deobfuscator/tracer/obj*
 VMP-Imports-Deobfuscator
+Triton/
+etc/
+venv_38/
 
 test/trace* 
-test/test_*
+test/test
 test/objdump* 
 test/pin*
 test/vm_*

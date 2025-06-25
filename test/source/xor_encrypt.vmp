@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Document Version="2">
+    <Protection InputFileName="/root/deobfuscation/test/test/xor_single/xor_single" Options="328192" VMCodeSectionName=".???">
+        <Procedures>
+            <Procedure MapAddress='VMProtectMarker &quot;xor begin&quot;' Options="0" />
+        </Procedures>
+    </Protection>
+</Document>
